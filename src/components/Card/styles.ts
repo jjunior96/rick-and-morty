@@ -1,5 +1,17 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
+
+const appearFromBottom = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Container = styled.div`
   ${({ theme }) => css`
@@ -10,6 +22,8 @@ export const Container = styled.div`
     overflow: hidden;
     background-color: ${theme.colors.white};
     transition: box-shadow 0.2s;
+
+    animation: ${appearFromBottom} 1s;
 
     &:hover {
       box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);

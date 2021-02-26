@@ -16,10 +16,18 @@ export const Content = styled.div`
 `;
 
 export const Title = styled(motion.div)`
-  margin-bottom: 1.6rem;
-  text-align: center;
-  color: #05f2af;
-  font-weight: bold;
+  ${({ theme }) => css`
+    margin-bottom: 1.6rem;
+    text-align: center;
+    color: #05f2af;
+    font-weight: bold;
+    font-size: ${theme.font.sizes.xxlarge};
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      font-size: ${theme.font.sizes.xlarge};
+    }
+  `}
 `;
 
 export const Result = styled.div`
@@ -62,4 +70,11 @@ export const Error = styled.div`
     justify-content: center;
     align-items: center;
   `}
+`;
+
+export const LinkContainer = styled.div`
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 `;
