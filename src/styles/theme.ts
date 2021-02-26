@@ -4,7 +4,10 @@ export default {
     gutter: '3.2rem'
   },
   border: {
-    radius: '0.4rem'
+    radius: '0.8rem'
+  },
+  box: {
+    shadow: '0 8px 8px #ddd'
   },
   font: {
     family:
@@ -27,7 +30,8 @@ export default {
     secondary: '',
     mainBg: '',
     lightBg: '',
-    white: '',
+    buttonSearch: '#B65CF2',
+    white: '#fff',
     black: '',
     lightGray: '',
     gray: '',
