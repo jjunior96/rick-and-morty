@@ -24,8 +24,7 @@
 ### Web
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/30422190/108910641-e8a4e700-7604-11eb-83fa-3fafeeee433c.png">
-<img src="https://user-images.githubusercontent.com/30422190/109300169-f8931580-7814-11eb-88e4-a060c1d5e329.png">
+<img src="https://user-images.githubusercontent.com/30422190/109355737-6fa0cc00-785e-11eb-9aa2-6c27b84bad65.png">
 </p>
 
 
