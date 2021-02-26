@@ -98,15 +98,13 @@ const Dashboard: React.FC = () => {
             <Card name={character?.name} image={character?.image} />
           ) : (
             characters.map((item, id) => (
-              <ul key={item.id}>
-                <li>
-                  <Link href="/character/[id]" as={`/character/${id + 1}`}>
-                    <a>
-                      <Card name={item.name} image={item.image} />
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+              <S.LinkContainer key={item.id}>
+                <Link href="/character/[id]" as={`/character/${id + 1}`}>
+                  <a>
+                    <Card name={item.name} image={item.image} />
+                  </a>
+                </Link>
+              </S.LinkContainer>
             ))
           )}
         </S.Result>

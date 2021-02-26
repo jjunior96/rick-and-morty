@@ -63,3 +63,10 @@ export const Error = styled.div`
     align-items: center;
   `}
 `;
+
+export const LinkContainer = styled.div`
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+`;
