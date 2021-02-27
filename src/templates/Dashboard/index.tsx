@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
               <S.LinkContainer key={item.id}>
                 <Link href="/character/[id]" as={`/character/${id + 1}`}>
                   <a>
-                    <Card name={item.name} image={item.image} />
+                    <Card id={item.id} name={item.name} image={item.image} />
                   </a>
                 </Link>
               </S.LinkContainer>
