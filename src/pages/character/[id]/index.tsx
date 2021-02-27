@@ -1,4 +1,7 @@
 import Head from 'next/head';
+
+import CharacterPage from 'templates/CharacterPage';
+
 const defaultEndpoint = `https://rickandmortyapi.com/api/character/`;
 
 interface GetServerProps {
@@ -30,12 +33,14 @@ export async function getServerSideProps({ query }: GetServerProps) {
 export default function Character({ data }: CharacterDataProps) {
   const { name, image } = data;
   return (
-    <div>
+    <>
       <Head>
         <title>{name}</title>
       </Head>
-      <img src={image} alt="" />
-      <p>{name}</p>
-    </div>
+      <CharacterPage>
+        <img src={image} alt="" />
+        <p>{name}</p>
+      </CharacterPage>
+    </>
   );
 }
