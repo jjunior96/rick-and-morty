@@ -1,15 +1,16 @@
 import * as S from './styles';
 
 interface CardProps {
+  id?: number;
   name?: string;
   image?: string;
 }
 
-const Card = ({ name, image }: CardProps) => {
+const Card = ({ id, name, image }: CardProps) => {
   return (
-    <S.Container>
+    <S.Container href={`/character/${id}`}>
       {name && (
-        <>
+        <a>
           <S.CardImage>
             <img src={image} alt={`${name} Thumbnail`} />
           </S.CardImage>
@@ -34,7 +35,7 @@ const Card = ({ name, image }: CardProps) => {
               {name}
             </S.Name>
           </S.Content>
-        </>
+        </a>
       )}
     </S.Container>
   );
