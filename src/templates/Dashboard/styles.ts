@@ -72,7 +72,7 @@ export const Error = styled.div`
   `}
 `;
 
-export const LinkContainer = styled.div`
+export const LinkContainer = styled(motion.div)`
   a {
     text-decoration: none;
     color: #000;
