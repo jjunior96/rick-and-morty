@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 const appearFromBottom = keyframes`
   from {
@@ -14,7 +13,7 @@ const appearFromBottom = keyframes`
   }
 `;
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   ${({ theme }) => css`
     width: 100%;
     max-width: 360px;
