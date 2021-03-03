@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import * as S from './styles';
 
 interface CardProps {
@@ -8,11 +10,16 @@ interface CardProps {
 
 const Card = ({ id, name, image }: CardProps) => {
   return (
-    <S.Container href={`/character/${id}`}>
+    <S.Container>
       {name && (
         <a>
           <S.CardImage>
-            <img src={image} alt={`${name} Thumbnail`} />
+            <motion.img
+              src={image}
+              alt={`${name} Thumbnail`}
+              animate={{ scale: 1 }}
+              whileHover={{ scale: 1.2 }}
+            />
           </S.CardImage>
           <S.Content>
             <S.Name
