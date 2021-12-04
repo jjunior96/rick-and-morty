@@ -1,24 +1,32 @@
-import {
-  InputHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-  useCallback
-} from 'react';
-import { IconBaseProps } from 'react-icons';
-import { useField } from '@unform/core';
+import { InputHTMLAttributes, useState, useCallback } from 'react';
 
 import * as S from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  icon?: React.ComponentType<IconBaseProps>;
-}
+export type LabelColorType = 'white' | 'black';
 
-const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+type Props = {
+  label?: string;
+  labelColor?: LabelColorType;
+  isRequired?: boolean;
+  error?: string;
+  isDisabled?: boolean;
+  icon?: React.ReactNode;
+};
+
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & Props;
+
+const Input = ({
+  label,
+  labelColor = 'black',
+  name,
+  isRequired = false,
+  error,
+  isDisabled = false,
+  type = 'text',
+  icon,
+  ...rest
+}: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const { fieldName, defaultValue, registerField } = useField(name);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -28,25 +36,37 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
     setIsFocused(false);
   }, []);
 
-  useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: inputRef.current,
-      path: 'value'
-    });
-  }, [fieldName, registerField]);
-
   return (
-    <S.Container isFocused={isFocused} aria-label="Search some character">
-      {Icon && <Icon size={20} />}
-      <input
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        defaultValue={defaultValue}
-        ref={inputRef}
-        aria-label="input de text"
-        {...rest}
-      />
+    <S.Container>
+      <S.Label
+        htmlFor={label}
+        isRequired={isRequired}
+        isDisabled={isDisabled}
+        labelColor={labelColor}
+      >
+        {label} <span>*</span>
+      </S.Label>
+      <S.IconContainer
+        isFocused={isFocused}
+        isErrored={!!error}
+        isDisabled={isDisabled}
+      >
+        {icon}
+        <input
+          name={name}
+          type={type}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          disabled={isDisabled}
+          {...rest}
+        />
+      </S.IconContainer>
+
+      {error && (
+        <S.Error title={error}>
+          <p>{error}</p>
+        </S.Error>
+      )}
     </S.Container>
   );
 };
