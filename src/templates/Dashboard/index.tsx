@@ -3,13 +3,13 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { BiSearch as SearchIcon } from 'react-icons/bi';
 
 import Card from 'components/Card';
-import Input from 'components/Input';
 import Button from 'components/Button';
 
 import api from 'services/api';
 
 import * as S from './styles';
 import Link from 'next/link';
+import Input from 'components/Input';
 
 export interface HomeProps {
   id: number;
@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
           <Input
             name="searchText"
             type="number"
-            value={search}
+            // value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search some character"
           />
