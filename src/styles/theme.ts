@@ -16,6 +16,7 @@ export default {
     normal: 400,
     bold: 600,
     sizes: {
+      xxsmall: '1rem',
       xsmall: '1.2rem',
       small: '1.4rem',
       medium: '1.6rem',
@@ -28,9 +29,11 @@ export default {
   colors: {
     primary: '',
     secondary: '',
+    gray_200: '#91AAB4',
+    gray_300: '#3E606F',
     mainBg: '',
     lightBg: '',
-    buttonSearch: '#B65CF2',
+    purple_300: '#B65CF2',
     white: '#fff',
     black: '',
     lightGray: '',

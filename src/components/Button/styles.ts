@@ -3,7 +3,7 @@ import { shade } from 'polished';
 
 export const Container = styled.button`
   ${({ theme }) => css`
-    background: ${theme.colors.buttonSearch};
+    background: ${theme.colors.purple_300};
     border-radius: 8px;
     border: 0;
     padding: 0 1.6rem;
@@ -15,7 +15,7 @@ export const Container = styled.button`
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: ${shade(0.1, theme.colors.buttonSearch)};
+      background-color: ${shade(0.1, theme.colors.purple_300)};
     }
 
     svg {
