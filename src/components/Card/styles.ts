@@ -1,63 +1,67 @@
-import styled, { css, keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
-
-const appearFromBottom = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 export const Container = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    max-width: 360px;
-    box-shadow: ${theme.box.shadow};
-    border-radius: ${theme.border.radius};
-    overflow: hidden;
-    background-color: ${theme.colors.white};
-    transition: box-shadow 0.2s;
-
-    animation: ${appearFromBottom} 1s;
-
-    &:hover {
-      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-    }
-  `}
-`;
-
-export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1.6rem;
-  margin: 0 auto;
+  justify-content: space-between;
+
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
-export const Name = styled(motion.p)`
+export const ImageContainer = styled.div`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.bold};
+    width: 100%;
+    height: 100%;
+
+    border-bottom: 4px solid ${theme.colors.primary};
+
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      cursor: pointer;
+
+      transition: transform ${theme.transition.default};
+
+      &:hover {
+        transform: scale(1.1);
+
+        ${media.lessThan('medium')`
+          transform: none;
+        `}
+      }
+    }
   `}
 `;
 
-export const CardImage = styled.div`
-  width: 100%;
-  overflow: hidden;
+export const CardFooter = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s;
+    justify-content: space-between;
 
-    &:hover {
-      transform: scale(1.2);
+    padding-top: ${theme.spacings.xsmall};
+
+    > svg {
+      cursor: pointer;
     }
-  }
+  `}
+`;
+
+export const Title = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.gray_300};
+
+    width: fit-content;
+    max-width: 20rem;
+
+    font-weight: ${theme.font.bold};
+    font-size: ${theme.font.sizes.small};
+  `}
 `;

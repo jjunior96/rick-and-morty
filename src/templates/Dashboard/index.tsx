@@ -1,55 +1,47 @@
-import { FormHandles } from '@unform/core';
-import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { BiSearch as SearchIcon } from 'react-icons/bi';
 
 import Card from 'components/Card';
 import Button from 'components/Button';
 
-import api from 'services/api';
+import debounce from 'lodash.debounce';
 
 import * as S from './styles';
 import Link from 'next/link';
-import Input from 'components/Input';
-
-export interface HomeProps {
-  id: number;
-  name: string;
-  image: string;
-}
+import { getCharacters } from 'services/hooks/characters';
+import { CharacterProps } from 'services/hooks/characters/types';
+import Form from 'components/Form';
+import { useForm } from 'react-hook-form';
+import InputControlled from 'components/InputControlled';
 
 const Dashboard: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
-  const [characters, setCharacters] = useState<HomeProps[]>([]);
-  const [character, setCharacter] = useState<HomeProps>();
+  const [characters, setCharacters] = useState<CharacterProps[]>([]);
   const [search, setSearch] = useState('');
-  const [inputError, setInputError] = useState('');
 
-  const handleSubmit = useCallback(
-    async (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault;
+  const { handleSubmit, control } = useForm();
 
-      if (!search) {
-        setInputError('Search some caracther');
-        return;
-      }
+  const handleSubmitData = useCallback(async (data) => {
+    console.log(data);
+  }, []);
 
-      try {
-        setInputError('');
-        const response = await api.get(`character/${search}`);
+  const handleSearch = useCallback((search) => {
+    if (search.target.value === '') return;
 
-        const character = response.data;
+    setSearch(search.target.value);
+  }, []);
 
-        setCharacter(character);
-      } catch (err) {
-        setInputError('Caracther not found');
-      }
-    },
-    [search]
-  );
+  const debouncedChangeHandler = useMemo(() => debounce(handleSearch, 300), [
+    handleSearch
+  ]);
+
   useEffect(() => {
-    api
-      .get(`/character`)
-      .then((response) => setCharacters(response.data.results));
+    const fechCharacters = async () => {
+      const { data } = await getCharacters();
+
+      setCharacters(data!);
+    };
+
+    fechCharacters();
   }, []);
 
   return (
@@ -74,39 +66,29 @@ const Dashboard: React.FC = () => {
         >
           <h1 className="title">Wubba Lubba Dub Dub!</h1>
         </S.Title>
-        <S.FormContainer onSubmit={handleSubmit} ref={formRef}>
-          <Input
-            name="searchText"
+        <Form onSubmit={handleSubmit(handleSubmitData)}>
+          <InputControlled
+            control={control}
+            name="searchCharacter"
             type="number"
-            // value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            autoFocus
+            onChange={debouncedChangeHandler}
             placeholder="Search some character"
           />
           <Button type="submit">
             <SearchIcon />
           </Button>
-        </S.FormContainer>
+        </Form>
         <S.Result>
-          {inputError && (
-            <S.Error>
-              {' '}
-              <p>{inputError}</p>
-            </S.Error>
-          )}
-
-          {search ? (
-            <Card name={character?.name} image={character?.image} />
-          ) : (
-            characters.map((item, id) => (
-              <S.LinkContainer key={item.id}>
-                <Link href="/character/[id]" as={`/character/${id + 1}`}>
-                  <a>
-                    <Card id={item.id} name={item.name} image={item.image} />
-                  </a>
-                </Link>
-              </S.LinkContainer>
-            ))
-          )}
+          {characters.map((item) => (
+            <S.LinkContainer key={item.id}>
+              <Link href="/character/[id]" as={`/character/${item.id}`}>
+                <a>
+                  <Card title={item.name} img={item.image} />
+                </a>
+              </Link>
+            </S.LinkContainer>
+          ))}
         </S.Result>
       </S.Content>
     </S.Container>
