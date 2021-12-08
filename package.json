@@ -29,14 +29,16 @@
     "@unform/web": "^2.1.6",
     "axios": "^0.21.1",
     "framer-motion": "^3.7.0",
+    "lodash.debounce": "^4.0.8",
     "next": "^12.0.4",
     "next-pwa": "^5.4.1",
     "polished": "^4.1.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hook-form": "^7.20.5",
+    "react-hook-form": "^7.21.0",
     "react-icons": "^4.2.0",
-    "styled-components": "5.2.1"
+    "styled-components": "5.2.1",
+    "styled-media-query": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",
@@ -46,6 +48,7 @@
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
     "@types/jest": "^26.0.19",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@types/styled-components": "^5.1.7",
