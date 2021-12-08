@@ -1,10 +1,11 @@
-import { InputHTMLAttributes, useState, useCallback } from 'react';
+import { InputHTMLAttributes, useState, useCallback, forwardRef } from 'react';
 
 import * as S from './styles';
 
 export type LabelColorType = 'white' | 'black';
 
 type Props = {
+  name: string;
   label?: string;
   labelColor?: LabelColorType;
   isRequired?: boolean;
@@ -15,17 +16,20 @@ type Props = {
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & Props;
 
-const Input = ({
-  label,
-  labelColor = 'black',
-  name,
-  isRequired = false,
-  error,
-  isDisabled = false,
-  type = 'text',
-  icon,
-  ...rest
-}: InputProps) => {
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  {
+    label,
+    labelColor = 'black',
+    name,
+    isRequired = false,
+    error,
+    isDisabled = false,
+    type = 'text',
+    icon,
+    ...rest
+  },
+  ref
+) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputFocus = useCallback(() => {
@@ -53,12 +57,13 @@ const Input = ({
       >
         {icon}
         <input
+          {...rest}
           name={name}
           type={type}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           disabled={isDisabled}
-          {...rest}
+          ref={ref}
         />
       </S.IconContainer>
 
@@ -71,4 +76,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default forwardRef(Input);
